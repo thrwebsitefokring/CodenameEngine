@@ -1,0 +1,15 @@
+<!DOCTYPE codename-engine-stage>
+<stage startCamPosX="200" startCamPosY="100" folder="stages/corleyIsAFart/" zoom="0.8" name="corleyIsAFart">
+	<gf/>
+	<sprite scrolly="0" x="-602" y="-320" sprite="evil/sky" scale="3" scrollx="0" name="sky"/>
+	<sprite scrolly="0.3" x="-800" y="-719" sprite="evil/train" scale="2.2" scrollx="0.3" name="train"/>
+	<sprite scrolly="0.3" x="-453" y="-1016" sprite="evil/wagon" scale="2.2" scrollx="0.3" name="wagon"/>
+	<sprite scrolly="0.3" x="-800" y="-850" sprite="evil/debris1" scale="2.2" scrollx="0.3" name="debris1"/>
+	<sprite x="-1000" scrolly="0.4" sprite="evil/gradient" y="-960" scale="2.2" name="gradient" scrollx="0.4"/>
+	<sprite x="-1228" scrolly="0.7" sprite="evil/backk" y="-867" scale="2" name="backk" scrollx="0.7"/>
+	<sprite x="-1502" y="-1011" sprite="evil/ground" scale="2.8" name="ground"/>
+	<dad x="-1191" camxoffset="100" y="-588" camyoffset="60"/>
+	<boyfriend camxoffset="-160" x="520" camyoffset="0" y="170"/>
+	<combo y="1000"/>
+	<sprite x="-1600" scrolly="1.4" sprite="evil/rocksfg" y="-1800" scale="4.4" name="rocksfg" scrollx="1.4"/>
+</stage>

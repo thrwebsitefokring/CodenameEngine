@@ -1,0 +1,7 @@
+<!DOCTYPE codename-engine-stage>
+<stage startCamPosY="630" startCamPosX="310" zoom="0.6" name="whire">
+	<gf/>
+	<dad camxoffset="-100" x="-150" camyoffset="30" y="730"/>
+	<boyfriend x="700" camxoffset="-160" y="160" camyoffset="0"/>
+	<combo x="282" y="357"/>
+</stage>
