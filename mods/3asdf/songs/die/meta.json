@@ -1,0 +1,17 @@
+{
+	"opponentModeAllowed": false,
+	"icon": "guy",
+	"difficulties": [
+		"Normal"
+	],
+	"parsedColor": -3355444,
+	"customValues": {},
+	"color": "#CCCCCC",
+	"name": "die",
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
+	"displayName": "die",
+	"beatsPerMeasure": 4,
+	"needsVoices": true,
+	"bpm": 170
+}
