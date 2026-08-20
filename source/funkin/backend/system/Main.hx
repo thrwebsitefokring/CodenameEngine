@@ -21,8 +21,12 @@ import openfl.Lib;
 import openfl.display.Sprite;
 import openfl.text.TextFormat;
 import openfl.utils.AssetLibrary;
+
+#if sys
 import sys.FileSystem;
 import sys.io.File;
+#end
+
 #if android
 import android.content.Context;
 import android.os.Build;
@@ -58,9 +62,11 @@ class Main extends Sprite
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function preInit() {
+		#if sys
 		funkin.backend.utils.NativeAPI.registerAsDPICompatible();
 		funkin.backend.system.CommandLineHandler.parseCommandLine(Sys.args());
 		funkin.backend.system.Main.fixWorkingDirectory();
+		#end
 	}
 
 	public function new()
@@ -147,7 +153,7 @@ class Main extends Sprite
 		#end
 
 		ModsFolder.init();
-		#if MOD_SUPPORT
+		#if (sys && MOD_SUPPORT)
 		if (FileSystem.exists("mods/autoload.txt"))
 			modToLoad = File.getContent("mods/autoload.txt").trim();
 
