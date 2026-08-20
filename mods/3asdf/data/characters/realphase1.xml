@@ -1,0 +1,9 @@
+<!DOCTYPE codename-engine-character>
+<character x="200" y="-120" sprite="rodriguezphase1" scale="0.6" camx="-200" camy="-400" icon="guy">
+	<anim name="idle" anim="asdfidle instance 1" x="0" y="0" fps="24" loop="true"/>
+	<anim name="singLEFT" anim="asdfleft instance 1" x="-307" y="471" fps="24" loop="false"/>
+	<anim name="singDOWN" anim="asdfdown instance 1" x="-304" y="-71" fps="24" loop="false"/>
+	<anim name="singUP" anim="asdfup instance 1" x="-313" y="-39" fps="24" loop="false"/>
+	<anim name="singRIGHT" anim="asdfright instance 1" x="-312" y="106" fps="24" loop="false"/>
+	<anim name="change" anim="asdfchangeartstyle instance 1" x="-310" y="1522" fps="24" loop="false"/>
+</character>

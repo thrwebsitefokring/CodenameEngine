@@ -1,0 +1,8 @@
+<!DOCTYPE codename-engine-character>
+<character x="-50" y="-50" sprite="mrmuffin" scale="0.6" flipX="true" camx="60" camy="150" isPlayer="true" icon="muffin" holdTime="6.1">
+	<anim name="idle" anim="idle0" x="0" y="0" fps="24" loop="false"/>
+	<anim name="singLEFT" anim="left0" x="23" y="3" fps="24" loop="false"/>
+	<anim name="singDOWN" anim="down0" x="16.5" y="-3" fps="24" loop="false"/>
+	<anim name="singUP" anim="up0" x="13" y="12" fps="24" loop="false"/>
+	<anim name="singRIGHT" anim="right0" x="2" y="6" fps="24" loop="false"/>
+</character>
