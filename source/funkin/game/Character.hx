@@ -1,6 +1,8 @@
 package funkin.game;
 
+#if sys
 import sys.FileSystem;
+#end
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Graphics;
 import flixel.util.typeLimit.OneOfTwo;
