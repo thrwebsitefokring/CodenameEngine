@@ -17,8 +17,10 @@ import funkin.game.Character;
 import haxe.xml.Access;
 import haxe.xml.Printer;
 import funkin.editors.ui.UIImageExplorer.ImageSaveData;
+#if sys
 import sys.FileSystem;
 import sys.io.File;
+#end
 
 class CharacterEditor extends UIState {
 	static var __character:String;
@@ -34,8 +36,6 @@ class CharacterEditor extends UIState {
 	@:noCompletion private var stageIndex:Int = 3;
 
 	public var topMenuSpr:UITopMenu;
-	// public var dragOffsetsCheckbox:UICheckbox;
-	// public var lockCameraCheckbox:UICheckbox;
 	
 	public var axisGizmo:AxisGizmo;
 	public var characterGizmo:CharacterGizmos;
@@ -517,6 +517,7 @@ class CharacterEditor extends UIState {
 			case CCharEditInfo(oldInfo, newInfo):
 				characterPropertiesWindow.editCharacterInfo(oldInfo, false);
 			case CCharEditSprite(fileID):
+				#if sys
 				var cneisdPath:String = './.temp/__undo__${Type.getClassName(Type.getClass(FlxG.state))}__${fileID}.cneisd';
 				if (FileSystem.exists(cneisdPath)) {
 					try {
@@ -530,6 +531,7 @@ class CharacterEditor extends UIState {
 						trace('ERROR COMPLETING UNDO: $e');
 					};
 				}
+				#end
 			case CAnimCreate(animID, animData):
 				characterAnimsWindow.deleteAnimation(characterAnimsWindow.buttons.members[animID], false);
 			case CAnimDelete(animID, animData):
@@ -591,6 +593,7 @@ class CharacterEditor extends UIState {
 			case CCharEditInfo(oldInfo, newInfo):
 				characterPropertiesWindow.editCharacterInfo(newInfo, false);
 			case CCharEditSprite(fileID):
+				#if sys
 				var cneisdPath:String = './.temp/__redo__${Type.getClassName(Type.getClass(FlxG.state))}__${fileID}.cneisd';
 				if (FileSystem.exists(cneisdPath)) {
 					try {
@@ -604,6 +607,7 @@ class CharacterEditor extends UIState {
 						trace('ERROR COMPLETING UNDO: $e');
 					};
 				}
+				#end
 			case CAnimCreate(animID, animData):
 				characterAnimsWindow.addAnimation(animData, animID, false);
 				playAnimation(animData.name);
@@ -865,7 +869,7 @@ class CharacterEditor extends UIState {
 	var zoom(default, set):Float = 0;
 	var __camZoom(default, set):Float = 1;
 	function set_zoom(val:Float) {
-		return zoom = CoolUtil.bound(val, -3.5, 1.75); // makes zooming not lag behind when continuing scrolling
+		return zoom = CoolUtil.bound(val, -3.5, 1.75);
 	}
 	function set___camZoom(val:Float) {
 		return __camZoom = CoolUtil.bound(val, 0.1, 3);
@@ -901,7 +905,6 @@ class CharacterEditor extends UIState {
 		t.icon = (Options.playAnimOnOffset = !Options.playAnimOnOffset) ? 1 : 0;
 	}
 
-	// The animation thats playing regardless if its valid or not
 	public var characterFakeAnim:String = "";
 	public function playAnimation(anim:String) @:privateAccess {
 		characterFakeAnim = anim;
