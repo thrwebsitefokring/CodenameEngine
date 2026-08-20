@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 DEV https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="tomno.png" width="864" height="500" spritePadding="3" borderPadding="0">
+	<SubTexture name="nope0000" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0001" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0002" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0003" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0004" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0005" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0006" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0007" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0008" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0009" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0010" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0011" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0012" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0013" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0014" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0015" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0016" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0017" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0018" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0019" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0020" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0021" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0022" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0023" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0024" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0025" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0026" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0027" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0028" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0029" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0030" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0031" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0032" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0033" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0034" x="438" y="0" width="426" height="497" frameX="-12" frameY="0" frameWidth="439" frameHeight="538"/>
+	<SubTexture name="nope0035" x="0" y="0" width="435" height="500" frameX="-3" frameY="0" frameWidth="439" frameHeight="538"/>
+</TextureAtlas>
