@@ -8,9 +8,12 @@ import haxe.Json;
 import haxe.io.Bytes;
 import haxe.io.Path;
 import openfl.display.BitmapData;
+import animate.FlxAnimateJson;
+
+#if sys
 import sys.FileSystem;
 import sys.io.File;
-import animate.FlxAnimateJson;
+#end
 
 using StringTools;
 using funkin.backend.utils.BitmapUtil;
@@ -59,6 +62,7 @@ class UIImageExplorer extends UIFileExplorer {
 		directoryTextBox = new UITextBox(8, 8+12+4, "", 210, 22, false, true);
 		directoryBG.members.push(directoryTextBox);
 
+		#if sys
 		if (image != null) {
 			var fullImagePath:String = '${Path.normalize(Sys.getCwd())}/${Paths.image(image)}'.replace('/', '\\');
 			var noExt = Path.withoutExtension(fullImagePath);
@@ -68,6 +72,7 @@ class UIImageExplorer extends UIFileExplorer {
 			if (FileSystem.exists(fullImagePath))
 				loadFile(fullImagePath);
 		}
+		#end
 
 		allowDirectories = CoolUtil.isMapEmpty(imageFiles); __firstLoad = false;
 		directoryButton.visible = directoryButton.selectable = directoryIcon.visible = directoryBG.visible = false;
@@ -97,6 +102,7 @@ class UIImageExplorer extends UIFileExplorer {
 		var fileName:String = Path.withoutDirectory(imagePath).toLowerCase();
 		var files:Array<String> = [];
 
+		#if sys
 		// CHECK ATLAS
 		if(allowAtlases && ANIMATE_ATLAS_REGEX.match(fileName)) {
 			// check if directory has the other files
@@ -134,6 +140,7 @@ class UIImageExplorer extends UIFileExplorer {
 				}
 			}
 		}
+		#end
 
 		// IF ATLAS FIND SPRITMAPS
 		var spritemaps:Array<String> = [];
@@ -145,6 +152,7 @@ class UIImageExplorer extends UIFileExplorer {
 					spritemaps.push(file);
 
 			spritemaps.sort(Reflect.compare);
+			#if sys
 			for(spritemap in spritemaps) {
 				var content:String = CoolUtil.removeBOM(File.getContent(Path.join([directoryPath, spritemap])));
 				var json:SpritemapJson = Json.parse(content);
@@ -158,6 +166,7 @@ class UIImageExplorer extends UIFileExplorer {
 					}
 				}
 			}
+			#end
 
 			if(spritemapImages.length == 0)
 				isAtlas = false;
@@ -168,18 +177,24 @@ class UIImageExplorer extends UIFileExplorer {
 		if (isAtlas) {
 			var dataPath:String = '$directoryPath/Animation.json'.replace('/', '\\');
 
+			#if sys
 			if (FileSystem.exists(dataPath)) {
 				var dataPathFile:String = File.getContent(dataPath);
 				animationList = CoolUtil.getAnimsListFromAtlas(cast haxe.Json.parse(dataPathFile));
 
 				imageFiles.set(Path.withoutDirectory(dataPath), dataPathFile);
 			}
+			#end
 		} else {
 			var dataPathExt:String = CoolUtil.imageHasFrameData(imagePath);
 			var dataPath:String = Path.withExtension(imagePath, dataPathExt);
+			#if sys
 			var dataPathFile:String = !isAtlas && dataPathExt != null ? File.getContent(dataPath) : null;
-	
-			if (dataPathExt != null) {
+			#else
+			var dataPathFile:String = null;
+			#end
+
+			if (dataPathExt != null && dataPathFile != null) {
 				frames = CoolUtil.loadFramesFromData(dataPathFile, dataPathExt);
 				animationList = CoolUtil.getAnimsListFromFrames(frames, dataPathExt);
 
@@ -197,6 +212,7 @@ class UIImageExplorer extends UIFileExplorer {
 			directoryPath = Path.directory(imagePath);
 			fileName = Path.withoutDirectory(imagePath).toLowerCase();
 
+			#if sys
 			for(spritemap in spritemapImages) {
 				var spritemapPath:String = Path.join([directoryPath, spritemap]);
 
@@ -208,7 +224,8 @@ class UIImageExplorer extends UIFileExplorer {
 			}
 
 			file = cast sys.io.File.getBytes(filePath = spritemapPath);
-			image = BitmapData.fromBytes(file).crop();
+			#end
+			if (file != null) image = BitmapData.fromBytes(file).crop();
 
 		} else {
 			size = file.length;
@@ -218,27 +235,23 @@ class UIImageExplorer extends UIFileExplorer {
 		}
 
 		// DISPLAY IMAGE!!
-		uiElement = new FlxSprite().loadGraphic(image);
-		var imageScale:Float = 1;
-		if (uiElement.width < Math.min(300, maxSize.x) || uiElement.height < Math.min(200, maxSize.y))
-			imageScale = Math.max(Math.min(300, maxSize.x) / uiElement.width, Math.min(200, maxSize.y) / uiElement.height);
-		else if (uiElement.width > maxSize.x || uiElement.height > maxSize.y)
-			imageScale = Math.min(maxSize.x/uiElement.width, maxSize.y/uiElement.height);
-		uiElement.scale.set(imageScale, imageScale);
-		uiElement.updateHitbox();
+		if (image != null) {
+			uiElement = new FlxSprite().loadGraphic(image);
+			var imageScale:Float = 1;
+			if (uiElement.width < Math.min(300, maxSize.x) || uiElement.height < Math.min(200, maxSize.y))
+				imageScale = Math.max(Math.min(300, maxSize.x) / uiElement.width, Math.min(200, maxSize.y) / uiElement.height);
+			else if (uiElement.width > maxSize.x || uiElement.height > maxSize.y)
+				imageScale = Math.min(maxSize.x/uiElement.width, maxSize.y/uiElement.height);
+			uiElement.scale.set(imageScale, imageScale);
+			uiElement.updateHitbox();
 
-		bWidth = Std.int(uiElement.width)+32; bHeight = Std.int(uiElement.height)+32+deleteButton.bHeight+4;
-		uiElement.x = x+16; uiElement.y = y+16+deleteButton.bHeight+4;
+			bWidth = Std.int(uiElement.width)+32; bHeight = Std.int(uiElement.height)+32+deleteButton.bHeight+4;
+			uiElement.x = x+16; uiElement.y = y+16+deleteButton.bHeight+4;
 
-		uiElement.antialiasing = true;
-		members.push(uiElement);
+			uiElement.antialiasing = true;
+			members.push(uiElement);
+		}
 
-		//if (!isAtlas && frames != null) {
-		//	for (frame in frames.frames) {
-		//		var rect = frame.frame;
-		//		uiElement.drawRect(rect.x, rect.y, rect.width, rect.height, 0x00161E87, {thickness: Std.int(1.75/imageScale), color: 0xFF11178C});
-		//	}
-		//}
 		// GENERATE TEXT!!!
 		imagePath = new Path(imagePath);
 		imageName = isAtlas ? Path.withoutDirectory(directoryPath) : imagePath.file;
@@ -320,13 +333,17 @@ class UIImageExplorer extends UIFileExplorer {
 		if (imageData.isAtlas) directory += '/${imageData.imageName}';
 
 		var alreadlyExistingFiles:Array<String> = [];
+		#if sys
 		for (name => file in imageData.imageFiles)
 			if (FileSystem.exists('$directory/$name'))
 				alreadlyExistingFiles.push('$directory/$name');
+		#end
 
 		function deleteExistingFiles() {
+			#if sys
 			for (file in alreadlyExistingFiles)
 				FileSystem.deleteFile(file);
+			#end
 			alreadlyExistingFiles = [];
 		}
 
