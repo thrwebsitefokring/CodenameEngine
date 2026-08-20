@@ -8,9 +8,12 @@ import lime.media.AudioBuffer;
 import lime.text.Font;
 import lime.utils.Bytes;
 import openfl.utils.AssetLibrary;
-import sys.io.File;
 
-#if MOD_SUPPORT
+#if sys
+import sys.io.File;
+#end
+
+#if (sys && MOD_SUPPORT)
 import funkin.backend.utils.SysZip.SysZipEntry;
 import funkin.backend.utils.SysZip;
 
@@ -64,7 +67,7 @@ class ZipFolderLibrary extends AssetLibrary implements IModsAssetLibrary {
 		}
 
 		var count:Int = 0;
-        for (_ in videoCacheRemap.keys()) count++;
+		for (_ in videoCacheRemap.keys()) count++;
 		if (count <= 0) return;
 		trace('Precached $count video${(count == 1) ? "" : "s"}');
 	}
