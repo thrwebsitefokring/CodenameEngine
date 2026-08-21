@@ -157,13 +157,15 @@ import lime.media.openal.AL;
 		if (!__isValid) return false;
 
 		var buffer = __source.buffer;
+		if (buffer == null || buffer.data == null) return false;
+
 		var wordSize = buffer.bitsPerSample >> 3, byteSize = 1 << (buffer.bitsPerSample - 1);
 		var pos = Math.floor(time * buffer.sampleRate / 1000 * buffer.channels * wordSize);
 		var leftMin = 0, leftMax = 0, rightMin = 0, rightMax = 0, size = 0, buf;
 
 		#if lime_cffi
 		var backend = __source.__backend, i = 0;
-		if (backend.streamed) {
+		if (backend != null && backend.streamed) {
 			size = backend.bufferLengths[i = backend.bufferLengths.length - backend.requestBuffers];
 			buf = backend.bufferDatas[i].buffer;
 			pos -= Math.floor(backend.bufferTimes[i] * buffer.sampleRate * buffer.channels * wordSize);
@@ -176,7 +178,7 @@ import lime.media.openal.AL;
 		}
 		else
 		#end {
-			buf = buffer.data #if !js .buffer #end;
+			buf = buffer.data.buffer;
 			size = #if js buf.byteLength #else buf.length #end;
 		}
 
@@ -188,7 +190,7 @@ import lime.media.openal.AL;
 			if (c % 2 == 0) ((b > leftMax) ? (leftMax = b) : (if ((b = -b) > leftMin) (leftMin = b)));
 			else ((b > rightMax) ? (rightMax = b) : (if ((b = -b) > rightMin) (rightMin = b)));
 			if ((pos += wordSize) >= size) #if lime_cffi {
-				if (!backend.streamed || ++i >= backend.bufferLengths.length) break;
+				if (backend == null || !backend.streamed || ++i >= backend.bufferLengths.length) break;
 				pos = 0;
 				buf = backend.bufferDatas[i].buffer;
 				size = backend.bufferLengths[i];
