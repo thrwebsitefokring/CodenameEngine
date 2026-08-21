@@ -12,6 +12,7 @@ class HTML5AudioSource
 	private var id:Int;
 	private var length:Null<Float>;
 	private var loops:Int;
+	private var loopTime:Float = 0;
 	private var parent:AudioSource;
 	private var playing:Bool;
 	private var position:Vector4;
