@@ -2,7 +2,9 @@ package funkin.backend.utils;
 
 import flixel.sound.FlxSound;
 import lime.media.AudioBuffer;
+#if sys
 import lime.utils.ArrayBufferView.ArrayBufferIO;
+#end
 import lime.utils.ArrayBuffer;
 
 #if (lime_cffi && lime_vorbis)
@@ -31,14 +33,30 @@ final class AudioAnalyzer {
 	 * @return Byte from the audio buffer with specified position.
 	 */
 	public static function getByte(buffer:ArrayBuffer, position:Int, wordSize:Int):Int {
+		#if sys
 		if (wordSize == 2) return inline ArrayBufferIO.getInt16(buffer, position);
 		else if (wordSize == 3) {
 			var b = inline ArrayBufferIO.getUint16(buffer, position) | (buffer.get(position + 2) << 16);
-			if (b & 0x800000 != 0) return b - 0x1000000;
+			if (b & 0x800000 != 0) return Std.int(b - 0x1000000);
 			else return b;
 		}
 		else if (wordSize == 4) return inline ArrayBufferIO.getInt32(buffer, position);
 		else return inline ArrayBufferIO.getUint8(buffer, position) - 128;
+		#else
+		var view = new openfl.utils.ByteArray();
+		@:privateAccess view.__fromBytes(buffer);
+		view.position = position;
+		view.endian = openfl.utils.Endian.LITTLE_ENDIAN;
+
+		if (wordSize == 2) return view.readShort();
+		else if (wordSize == 3) {
+			var b = view.readUnsignedShort() | (view.readUnsignedByte() << 16);
+			if (b & 0x800000 != 0) return Std.int(b - 0x1000000);
+			else return b;
+		}
+		else if (wordSize == 4) return view.readInt();
+		else return view.readUnsignedByte() - 128;
+		#end
 	}
 
 	/**
@@ -450,7 +468,13 @@ final class AudioAnalyzer {
 	}
 
 	inline function __readData(startPos:Float, endPos:Float, callback:AudioAnalyzerCallback) {
-		var pos = Math.floor(startPos * __toBits), end = Math.min(Math.floor(endPos * __toBits), buffer.data.buffer.length), c = 0;
+		#if js
+		var bufferLength:Int = buffer.data.buffer.byteLength;
+		#else
+		var bufferLength:Int = buffer.data.buffer.length;
+		#end
+
+		var pos = Math.floor(startPos * __toBits), end = Math.min(Math.floor(endPos * __toBits), bufferLength), c = 0;
 		pos -= pos % __sampleSize;
 		end -= end % __sampleSize;
 
